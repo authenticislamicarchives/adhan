@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Adhan Al Hidayah</string>
+    <string name="txt_fajr">Fajr</string>
+    <string name="txt_lever">Lever du soleil</string>
+    <string name="txt_dhuhr">Dhuhr</string>
+    <string name="txt_asr">Asr</string>
+    <string name="txt_maghrib">Maghrib</string>
+    <string name="txt_isha">Isha</string>
+    <string name="txt_ville_methode">Villiers sur Marne, méthode : Umm al Qura</string>
+    <string name="channel_id">adhan_channel</string>
+    <string name="channel_name">Notification Adhan</string>
+    <string name="version">"Version "</string>
+    <string name="btn_app">Download Authentic Islam</string>
+    <string name="btn_blog">authenticislam.org</string>
+    <string name="btn_mail">Contact</string>
+    <string name="txt_author">Réalisé par Authentic Islamic Archives</string>
+    <string name="txt_muharram">Muharram</string>
+    <string name="txt_safar">Safar</string>
+    <string name="txt_rabi_1">Rabi\' al Awwal</string>
+    <string name="txt_rabi_2">Rabi\' al Akhir</string>
+    <string name="txt_jumada_1">Jumada al Awwal</string>
+    <string name="txt_jumada_2">Jumada al Akhir</string>
+    <string name="txt_rajab">Rajab</string>
+    <string name="txt_shaban">Sha\'ban</string>
+    <string name="txt_ramadan">Ramadan</string>
+    <string name="txt_shawwal">Shawwal</string>
+    <string name="txt_dhul_qadah">Dhul Qa\'dah</string>
+    <string name="txt_dhul_hijjah">Dhul Hijjah</string>
+    <string name="notification_big_title">"C\'est l\'heure de salat "</string>
+</resources>

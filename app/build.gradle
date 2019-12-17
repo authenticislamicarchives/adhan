@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+
+ext {
+
+    versionMajor = 1
+    versionMinor = 2
+    versionPatch = 0
+}
+
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "abdoulbasith.adhan.ihdina"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode versionMajor * 1000000 + versionMinor * 1000 + versionPatch
+        versionName String.valueOf(versionMajor) + "." + String.valueOf(versionMinor) + "." + String.valueOf(versionPatch)
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+    signingConfigs {
+        release {
+            storeFile file("../key/adhanKey.jks")
+            storePassword "#adhanKey#"
+            keyAlias "adhanKey"
+            keyPassword "#adhanKey#"
+        }
+    }
+
+    buildTypes {
+
+
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                outputFileName = "adhanAlHidayah-${variant.versionName}-${variant.name}.apk"
+            }
+        }
+
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation project(':azan')
+}

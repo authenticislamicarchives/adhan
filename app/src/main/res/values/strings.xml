@@ -6,7 +6,7 @@
     <string name="txt_asr">Asr</string>
     <string name="txt_maghrib">Maghrib</string>
     <string name="txt_isha">Isha</string>
-    <string name="txt_ville_methode">Villiers sur Marne, méthode : Umm al Qura</string>
+    <string name="txt_ville_methode">Méthode : Umm al Qura</string>
     <string name="channel_id">adhan_channel</string>
     <string name="channel_name">Notification Adhan</string>
     <string name="version">"Version "</string>
@@ -27,4 +27,13 @@
     <string name="txt_dhul_qadah">Dhul Qa\'dah</string>
     <string name="txt_dhul_hijjah">Dhul Hijjah</string>
     <string name="notification_big_title">"C\'est l\'heure de salat "</string>
+    <string name="shared_preference">AdhanSharedPreferences</string>
+    <string name="preference_city">PreferenceCity</string>
+
+    <string-array name="city_array">
+        <item>Villiers sur Marne, France</item>
+        <item>مكة ,السعودية</item>
+        <item>المدينة المنورة ,السعودية</item>
+        <item>காரைக்கால், இந்தியா</item>
+    </string-array>
 </resources>

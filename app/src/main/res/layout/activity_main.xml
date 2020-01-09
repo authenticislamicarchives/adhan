@@ -38,6 +38,7 @@
         android:src="@mipmap/ic_launcher_round"/>
 
     <LinearLayout
+        android:id="@+id/ll_prayer_times"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -249,6 +250,13 @@
             android:padding="5dp"
             style="@style/txt_normal"/>
     </LinearLayout>
+
+    <Spinner
+        android:id="@+id/location_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_prayer_times"
+        android:layout_margin="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

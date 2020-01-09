@@ -5,7 +5,9 @@ import android.app.NotificationManager;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.IslamicCalendar;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -15,8 +17,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.azan.types.PrayersType;
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView txt_fajr, txt_lever, txt_dhuhr, txt_asr, txt_maghrib, txt_isha, txt_date_hijri, txt_date, txt_lieu_methode, txt_version;
     private Button btn_app, btn_blog, btn_mail;
     private HashMap<PrayersType, Date> salahMap = new HashMap<>();
+    private Spinner spinner;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         btn_mail = findViewById(R.id.btn_mail);
 
         txt_version.append(BuildConfig.VERSION_NAME);
+
+        spinner = findViewById(R.id.location_spinner);
+
+        sharedPreferences = getSharedPreferences(getString(R.string.shared_preference), Context.MODE_PRIVATE);
 
 
         getHijriDate();
@@ -151,14 +163,14 @@ public class MainActivity extends AppCompatActivity {
 
         txt_lieu_methode.setText(getString(R.string.txt_ville_methode));
 
-        salahMap = Utils.getSalahTimes();
+        salahMap = Utils.getSalahTimes(sharedPreferences.getInt(getString(R.string.preference_city), 0));
 
         txt_fajr.setText(getFormattedTime(salahMap.get(PrayersType.FAJR)));
         txt_lever.setText(getFormattedTime(salahMap.get(PrayersType.SUNRISE)));
         txt_dhuhr.setText(getFormattedTime(salahMap.get(PrayersType.ZUHR)));
         txt_asr.setText(getFormattedTime(salahMap.get(PrayersType.ASR)));
         txt_maghrib.setText(getFormattedTime(salahMap.get(PrayersType.MAGHRIB)));
-        txt_isha.append(getFormattedTime(salahMap.get(PrayersType.ISHA)));
+        txt_isha.setText(getFormattedTime(salahMap.get(PrayersType.ISHA)));
 
     }
 
@@ -214,6 +226,39 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(emailIntent);
             }
         });
+
+        final ArrayAdapter<CharSequence> locationAdapter = ArrayAdapter.createFromResource(this, R.array.city_array, R.layout.spinner_item);
+        locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(locationAdapter);
+
+
+        int citySelection = sharedPreferences.getInt(getString(R.string.preference_city), 0);
+        spinner.setSelection(citySelection);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getApplicationContext(), locationAdapter.getItem(position).toString(), Toast.LENGTH_SHORT).show();
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(getString(R.string.preference_city), position);
+                editor.apply();
+
+
+                getHijriDate();
+
+                getSalahTimes();
+
+                scheduleJob();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     private String getFormattedDate(Date date){

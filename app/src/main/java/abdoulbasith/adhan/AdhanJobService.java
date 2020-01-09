@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Build;
@@ -64,16 +65,21 @@ public class AdhanJobService extends JobService {
 
         Log.d(TAG, "doWork");
 
-        salahMap = Utils.getSalahTimes();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.shared_preference), MODE_PRIVATE);
+
+        salahMap = Utils.getSalahTimes(sharedPreferences.getInt(getString(R.string.preference_city), 0));
 
         createNotificationChannel();
 
 
         for(Map.Entry<PrayersType, Date> entry : salahMap.entrySet()) {
 
+            Log.d(AdhanJobService.TAG, entry.getKey().name());
+            Log.d(AdhanJobService.TAG, entry.getValue().toString());
+
             if(entry.getKey() != PrayersType.SUNRISE) {
 
-                // If salah time is not older than now
+                // If salah time is not before now (after current date)
                 if(!entry.getValue().before(new Date())) {
 
                     Calendar calendar = Calendar.getInstance();

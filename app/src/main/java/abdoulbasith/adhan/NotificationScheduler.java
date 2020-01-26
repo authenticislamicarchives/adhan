@@ -89,7 +89,7 @@ public class NotificationScheduler {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(context, channelId);
 
-        notificationBuilder.setSmallIcon(R.mipmap.ic_launcher)
+        notificationBuilder.setSmallIcon(R.drawable.ic_stat_mosque)
                 .setWhen(System.currentTimeMillis())
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                 .setAutoCancel(true)

@@ -24,13 +24,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.azan.PrayerTimes;
+import com.azan.TimeCalculator;
+import com.azan.types.AngleCalculationType;
 import com.azan.types.PrayersType;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 

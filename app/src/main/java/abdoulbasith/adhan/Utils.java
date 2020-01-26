@@ -49,48 +49,63 @@ public class Utils {
             case 0:
                 latitude = latitudeVilliers;
                 longitude = longitudeVillers;
-                timeZone = TimeZone.getTimeZone("GMT+00:00");
+                timeZone = TimeZone.getTimeZone("Europe/Paris");
                 break;
             case 1:
                 latitude = latitudeMakkah;
                 longitude = longitudeMakkah;
 
-                timeZone = TimeZone.getTimeZone("GMT+2:00");
+                timeZone = TimeZone.getTimeZone("Asia/Riyadh");
                 break;
             case 2:
                 latitude = latitudeMadinah;
                 longitude = longitudeMadinah;
-                timeZone = TimeZone.getTimeZone("GMT+2:00");
+                timeZone = TimeZone.getTimeZone("Asia/Riyadh");
                 break;
             case 3:
                 latitude = latitudeKaraikal;
                 longitude = longitudeKaraikal;
 
-                timeZone = TimeZone.getTimeZone("GMT+5:30");
+                timeZone = TimeZone.getTimeZone("Asia/Calcutta");
             default:
                 break;
         }
 
+        int hoursToAddinMs = (int) TimeUnit.MILLISECONDS.toHours(timeZone.getRawOffset() - TimeZone.getDefault().getRawOffset());
 
-        GregorianCalendar date = new GregorianCalendar(timeZone);
-
-        Log.d("MainActivity", "TimeZone name :"+timeZone.getDisplayName());
-        Log.d("MainActivity", "TimeZone offset :"+TimeUnit.MILLISECONDS.toHours(timeZone.getRawOffset()));
+        Calendar calendar = Calendar.getInstance();
 
 
-        PrayerTimes prayerTimes = new TimeCalculator().date(date).location(latitude, longitude,
-                0, TimeUnit.MILLISECONDS.toHours(timeZone.getRawOffset())).timeCalculationMethod(AngleCalculationType.UMM_AL_QURA).umElQuraRamadanAdjustment(false).calculateTimes();
+        PrayerTimes prayerTimes = new TimeCalculator().date(new GregorianCalendar()).location(latitude, longitude,
+                0, 0).timeCalculationMethod(AngleCalculationType.UMM_AL_QURA).umElQuraRamadanAdjustment(false).calculateTimes();
         prayerTimes.setUseSecond(true);
 
 
         HashMap<PrayersType, Date> salahMap = new HashMap<>();
 
-        salahMap.put(PrayersType.FAJR, prayerTimes.getPrayTime(PrayersType.FAJR));
-        salahMap.put(PrayersType.SUNRISE, prayerTimes.getPrayTime(PrayersType.SUNRISE));
-        salahMap.put(PrayersType.ZUHR, prayerTimes.getPrayTime(PrayersType.ZUHR));
-        salahMap.put(PrayersType.ASR, prayerTimes.getPrayTime(PrayersType.ASR));
-        salahMap.put(PrayersType.MAGHRIB, prayerTimes.getPrayTime(PrayersType.MAGHRIB));
-        salahMap.put(PrayersType.ISHA, prayerTimes.getPrayTime(PrayersType.ISHA));
+        calendar.setTime(prayerTimes.getPrayTime(PrayersType.FAJR));
+        calendar.add(Calendar.HOUR_OF_DAY, hoursToAddinMs);
+        salahMap.put(PrayersType.FAJR, calendar.getTime());
+
+        calendar.setTime(prayerTimes.getPrayTime(PrayersType.SUNRISE));
+        calendar.add(Calendar.HOUR_OF_DAY, hoursToAddinMs);
+        salahMap.put(PrayersType.SUNRISE, calendar.getTime());
+
+        calendar.setTime(prayerTimes.getPrayTime(PrayersType.ZUHR));
+        calendar.add(Calendar.HOUR_OF_DAY, hoursToAddinMs);
+        salahMap.put(PrayersType.ZUHR, calendar.getTime());
+
+        calendar.setTime(prayerTimes.getPrayTime(PrayersType.ASR));
+        calendar.add(Calendar.HOUR_OF_DAY, hoursToAddinMs);
+        salahMap.put(PrayersType.ASR, calendar.getTime());
+
+        calendar.setTime(prayerTimes.getPrayTime(PrayersType.MAGHRIB));
+        calendar.add(Calendar.HOUR_OF_DAY, hoursToAddinMs);
+        salahMap.put(PrayersType.MAGHRIB, calendar.getTime());
+
+        calendar.setTime(prayerTimes.getPrayTime(PrayersType.ISHA));
+        calendar.add(Calendar.HOUR_OF_DAY, hoursToAddinMs);
+        salahMap.put(PrayersType.ISHA, calendar.getTime());
 
         Log.d("MainActivity", "salahMap : "+salahMap.toString());
 

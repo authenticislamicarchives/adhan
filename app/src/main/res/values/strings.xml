@@ -6,7 +6,7 @@
     <string name="txt_asr">Asr</string>
     <string name="txt_maghrib">Maghrib</string>
     <string name="txt_isha">Isha</string>
-    <string name="txt_ville_methode">Méthode : Umm al Qura</string>
+    <string name="txt_ville_methode">Méthode : UOIF</string>
     <string name="channel_id">adhan_channel</string>
     <string name="channel_name">Notification Adhan</string>
     <string name="version">"Version "</string>

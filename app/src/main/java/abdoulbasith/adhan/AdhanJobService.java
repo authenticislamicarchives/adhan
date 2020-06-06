@@ -93,49 +93,6 @@ public class AdhanJobService extends JobService {
             }
         }
 
-        //TEST
-
-        /*Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 1);
-
-        NotificationScheduler.setReminder(this, AlarmReceiver.class, calendar, "TEST", 111);*/
-
-
-        //Calendar calendar = Calendar.getInstance();
-        //calendar.add(Calendar.MINUTE, 1);
-
-        //NotificationScheduler.setReminder(this, AlarmReceiver.class, calendar, "Test");
-
-
-        /*String channelId = getString(R.string.channel_id);NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-        bigTextStyle.setBigContentTitle("C'est l'heure de salat");
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        //for(Map.Entry<PrayersType, Date> entry : salahMap.entrySet()) {
-
-            NotificationCompat.Builder notificationBuilder =
-                    new NotificationCompat.Builder(this, channelId);
-
-            notificationBuilder.setSmallIcon(R.mipmap.ic_launcher)
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setWhen(System.currentTimeMillis()+5000)
-                    .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                    .setAutoCancel(true)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setChannelId(getString(R.string.channel_id))
-                    .setContentIntent(pendingIntent)
-                    .setStyle(bigTextStyle);
-
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            //notificationManager.notify(entry.getKey().getIndex(), notificationBuilder.build());
-            notificationManager.notify(1, notificationBuilder.build());*/
-        //}
 
         Log.d(TAG, "Job finished!");
         isWorking = false;

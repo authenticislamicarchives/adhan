@@ -77,7 +77,7 @@ public class Utils {
 
 
         PrayerTimes prayerTimes = new TimeCalculator().date(new GregorianCalendar()).location(latitude, longitude,
-                0, 0).timeCalculationMethod(AngleCalculationType.UMM_AL_QURA).umElQuraRamadanAdjustment(false).calculateTimes();
+                0, 0).timeCalculationMethod(AngleCalculationType.UOIF).umElQuraRamadanAdjustment(false).calculateTimes();
         prayerTimes.setUseSecond(true);
 
 
